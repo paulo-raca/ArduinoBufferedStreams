@@ -4,10 +4,12 @@
 
 class LoopbackStream : public Stream {
   uint8_t *buffer;
-  uint16_t buffer_len;
-  uint16_t pos, len;
+  uint16_t buffer_size;
+  uint16_t pos, size;
 public:
-  LoopbackStream(uint16_t buffer_len = 64);
+  static const uint16_t DEFAULT_SIZE = 64;
+  
+  LoopbackStream(uint16_t buffer_size = LoopbackStream::DEFAULT_SIZE);
   ~LoopbackStream();
   
   virtual size_t write(uint8_t);

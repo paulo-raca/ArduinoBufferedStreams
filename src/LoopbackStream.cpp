@@ -1,10 +1,10 @@
 #include "LoopbackStream.h"
 
-LoopbackStream::LoopbackStream(uint16_t buffer_len) {
-  this->buffer = malloc(buffer_len);
-  this->buffer_len = buffer_len;
+LoopbackStream::LoopbackStream(uint16_t buffer_size) {
+  this->buffer = malloc(buffer_size);
+  this->buffer_size = buffer_size;
   this->pos = 0;
-  this->len = 0;
+  this->size = 0;
 }
 LoopbackStream::~LoopbackStream() {
   free(buffer);
@@ -13,43 +13,46 @@ LoopbackStream::~LoopbackStream() {
 
 
 int LoopbackStream::read() {
-  int ret = buffer[pos];
-  pos++;
-  len--;
-  if (pos == buffer_len) {
-    pos = 0;
+  if (size == 0) {
+    return -1;
+  } else {
+    int ret = buffer[pos];
+    pos++;
+    size--;
+    if (pos == buffer_size) {
+      pos = 0;
+    }
+    return ret;
   }
-  return ret;
 }
 
 size_t LoopbackStream::write(uint8_t v) {
-  if (len == buffer_len) {
+  if (size == buffer_size) {
     return 0;
   } else {
-    int p = pos + len;
-    if (p >= buffer_len) {
-      p -= buffer_len;
+    int p = pos + size;
+    if (p >= buffer_size) {
+      p -= buffer_size;
     }
     buffer[p] = v;
-    len++;
+    size++;
     return 1;
   }  
 }
 
 int LoopbackStream::available() {
-  return len;
+  return size;
 }
 
 int LoopbackStream::availableForWrite() {
-  return buffer_len - len;
+  return buffer_size - size;
 }
 
 int LoopbackStream::peek() {
-  return len == 0 ? -1 : buffer[pos];
+  return size == 0 ? -1 : buffer[pos];
 }
 
 void LoopbackStream::flush() {
-  len = 0;
-  pos = 0;
+  //I'm not sure what to do here...
 }
 
