@@ -2,6 +2,13 @@
 
 #include <Stream.h>
 
+/*
+ * A LoopbackStream stores all data written in an internal buffer and returns it back when the stream is read.
+ * 
+ * If the buffer overflows, the last bytes written are lost.
+ * 
+ * It can be used as a buffering layer between components.
+ */
 class LoopbackStream : public Stream {
   uint8_t *buffer;
   uint16_t buffer_size;

@@ -1,6 +1,14 @@
 #pragma once
 
-#include <LoopbackStream.h>
+#include "LoopbackStream.h"
+
+/*
+ * PipedStreams are created in pairs, and all data written to one of the streams can be read on the other
+ * 
+ * If any of the internal buffers overflows, the last bytes written are lost.
+ * 
+ * It can be used as a Serial or Socket-like layer between components.
+ */
 
 class PipedStream : public Stream {
   LoopbackStream& in;
