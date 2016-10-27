@@ -2,7 +2,7 @@
 
 LoopbackStream::LoopbackStream(uint16_t buffer_size) {
   this->buffer = malloc(buffer_size);
-  this->buffer_size = buffer_size;
+  this->buffer = (uint8_t*) malloc(buffer_size);
   this->pos = 0;
   this->size = 0;
 }
