@@ -61,13 +61,21 @@ void setup() {
 void loop() {
     static long count = 0;
     if (server.hasClient()){
-      if (!serverClient.connected() || !serverClient){
-        if(!serverClient) {
-          serverClient.stop();
+        buffer << "if (server.hasclient()) => YES" << endl;
+        if (!serverClient.connected() || !serverClient){
+           buffer << "if (!serverClient.connected() || !serverClient) => YES" << endl;
+          if(!serverClient) {
+            buffer << "if(!serverClient) => YES" << endl;
+            serverClient.stop();
+          }
+            serverClient = server.available();
+            buffer << "server.available" << endl;
+            serverClient.flush();
         }
-          serverClient = server.available();
-          serverClient.flush();
-      }
+        else  {
+            WiFiClient serverClient = server.available();
+            serverClient.stop();
+        }
    }
 
    buffer << "Hello World" << endl;
