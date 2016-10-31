@@ -94,19 +94,21 @@ void loop() {
 
 
 void console_send() {
-
+	
     if (buffer.available()) {
         long chars = buffer.available();
-        long i;
-        while ( i == chars) {
-            //buffer.readBytes(sbuf, bufsize);
+        long i = 0;
+        while ( i < chars) {
+          
             if (serverClient && serverClient.connected()){
     
                 serverClient.write(buffer.peek());
                 delay(0);
+                
              }
          Serial.write(buffer.read());  
          delay(0); 
+         i++;
         }
            
     } 
