@@ -94,18 +94,22 @@ void loop() {
 
 
 void console_send() {
+
     if (buffer.available()) {
-        size_t bufsize = buffer.available();
-        uint8_t sbuf[bufsize];
-        // Empty the buffer by copying it in a temporary one.
-        buffer.readBytes(sbuf, bufsize);
-        if (serverClient && serverClient.connected()){
-          // Output the buffer to telnet clients:
-            serverClient.write(sbuf, bufsize); 
-            delay(1);
-         }
-         // Also mirror it to to Serial           
-         Serial.write(sbuf, bufsize);   
-        }  
-        
+        long chars = buffer.available();
+        long i;
+        while ( i == chars) {
+            //buffer.readBytes(sbuf, bufsize);
+            if (serverClient && serverClient.connected()){
+    
+                serverClient.write(buffer.peek());
+                delay(0);
+             }
+         Serial.write(buffer.read());  
+         delay(0); 
+        }
+           
+    } 
 }
+		
+	
