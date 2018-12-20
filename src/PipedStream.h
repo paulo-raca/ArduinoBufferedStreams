@@ -15,7 +15,10 @@ class PipedStream : public Stream {
   LoopbackStream& out;
 public:
   PipedStream(LoopbackStream& in, LoopbackStream& out);
-  
+
+  /** Clear the buffers */
+  void clear(); 
+
   virtual size_t write(uint8_t);
   virtual int availableForWrite(void);
   

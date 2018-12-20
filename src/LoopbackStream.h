@@ -18,6 +18,9 @@ public:
   
   LoopbackStream(uint16_t buffer_size = LoopbackStream::DEFAULT_SIZE);
   ~LoopbackStream();
+    
+  /** Clear the buffer */
+  void clear(); 
   
   virtual size_t write(uint8_t);
   virtual int availableForWrite(void);

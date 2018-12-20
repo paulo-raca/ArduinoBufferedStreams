@@ -4,6 +4,12 @@ PipedStream::PipedStream(LoopbackStream& in, LoopbackStream& out)
 : in(in), out(out) 
 { }
 
+
+void PipedStream::clear() {
+  return in.clear();
+  return out.clear();
+}
+
 int PipedStream::read() {
   return in.read();
 }

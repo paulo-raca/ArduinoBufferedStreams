@@ -10,7 +10,10 @@ LoopbackStream::~LoopbackStream() {
   free(buffer);
 }
 
-
+void LoopbackStream::clear() {
+  this->pos = 0;
+  this->size = 0;
+}
 
 int LoopbackStream::read() {
   if (size == 0) {
