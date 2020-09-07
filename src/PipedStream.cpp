@@ -6,8 +6,8 @@ PipedStream::PipedStream(LoopbackStream& in, LoopbackStream& out)
 
 
 void PipedStream::clear() {
-  return in.clear();
-  return out.clear();
+  in.clear();
+  out.clear();
 }
 
 int PipedStream::read() {
