@@ -23,7 +23,7 @@ int PipedStream::available() {
 }
 
 int PipedStream::availableForWrite() {
-  return out.available();
+  return out.availableForWrite();
 }
 
 int PipedStream::peek() {
