@@ -71,6 +71,7 @@ void LoopbackStream::flush() {
   out_stream->flush();
 }
 
+// an optionally non-blocking version of flush() - flushOutStream == false shouldn't block, and flushOutStream == true only blocks if out_stream->flush() blocks
 void LoopbackStream::flushAvailableForWrite(bool flushOutStream) {
   if(!out_stream) return; // flushAvailableForWrite can't do anything without an out_stream to push data to and flush
   while(available() && out_stream->availableForWrite())
