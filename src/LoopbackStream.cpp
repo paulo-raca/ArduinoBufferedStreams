@@ -36,8 +36,9 @@ int LoopbackStream::read() {
 size_t LoopbackStream::write(uint8_t v) {
   if (size == buffer_size) {
     return 0;
-  } else if (buffer_size == 1) {
+  } else if (buffer_size == 1 && out_stream) {
     out_stream->write(v);  // passthrough use case, no temporary storage in buffer
+    return 1;
   } else {
     int p = pos + size;
     if (p >= buffer_size) {
