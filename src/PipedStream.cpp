@@ -33,6 +33,10 @@ void PipedStream::flush() {
   out.flush();
 }
 
+void PipedStream::flushAvailableForWrite(bool flushOutStream) {
+  out.flushAvailableForWrite(flushOutStream);
+}
+
 size_t PipedStream::fillFromStream(Stream &in_stream) {
   return out.fillFromStream(in_stream);
 }

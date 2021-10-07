@@ -71,6 +71,13 @@ void LoopbackStream::flush() {
   out_stream->flush();
 }
 
+void LoopbackStream::flushAvailableForWrite(bool flushOutStream) {
+  if(!out_stream) return; // flushAvailableForWrite can't do anything without an out_stream to push data to and flush
+  while(available() && out_stream->availableForWrite())
+    out_stream->write(read());
+  if(flushOutStream) out_stream->flush();
+}
+
 size_t LoopbackStream::fillFromStream(Stream &in_stream) {
   size_t count=0;
   while(in_stream.available() && availableForWrite()) {

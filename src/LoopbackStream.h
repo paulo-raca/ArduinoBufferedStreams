@@ -38,5 +38,6 @@ public:
   virtual int read();
   virtual int peek();
   virtual void flush();
+  virtual void flushAvailableForWrite(bool flushOutStream = true);
   virtual size_t fillFromStream(Stream &in_stream);
 };
