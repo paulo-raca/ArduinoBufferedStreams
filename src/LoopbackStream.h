@@ -30,7 +30,8 @@ public:
   /** Clear the buffer */
   void clear(); 
   
-  virtual size_t write(uint8_t);
+  virtual size_t write(uint8_t v);
+  using Print::write; // pull in write(str) and write(buf, size) from Print
   virtual int availableForWrite(void);
   
   virtual int available();
