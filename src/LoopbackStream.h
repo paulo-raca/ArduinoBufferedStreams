@@ -26,6 +26,7 @@ public:
   virtual int availableForWrite(void);
   
   virtual int available();
+  virtual bool contains(char);
   virtual int read();
   virtual int peek();
   virtual void flush();
