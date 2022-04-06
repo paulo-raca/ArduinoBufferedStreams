@@ -30,4 +30,8 @@ public:
   virtual int read();
   virtual int peek();
   virtual void flush();
+
+  virtual ssize_t streamRemaining() { return available(); }
+  virtual bool inputCanTimeout() { return false; }
+  virtual bool outputCanTimeout() { return false; }
 };
